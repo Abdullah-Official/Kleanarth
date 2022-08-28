@@ -1,0 +1,56 @@
+/*============== Sidebar=========== */
+.sidebar {
+
+  padding: 10px;
+  height: 100vh;
+  width: 30px;
+  background-color: rgb(240, 234, 233);
+  position: absolute;
+  left: 0;
+  color: rgb(0, 0, 0);
+}
+.sidebar_heading {
+  color: rgb(0, 0, 0);
+  text-align: left;
+  font-size: 100%;
+  padding: 10px;
+}
+.sidebar_heading:hover {
+  color: pink;
+  cursor: pointer;
+}
+.sidebar_heading1:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+/* ============== Table ================ */
+Link,
+th {
+  cursor: pointer;
+}
+
+.topbar1 {
+  /* text-align: center; */
+  /* padding:10px; */
+  /* padding-left: 10px; */
+  /* padding-right: 20px; */
+  width: 100vw;
+  /* background-color: cadetblue; */
+  position: absolute;
+  background-color: rgba(222, 110, 75);
+  left: 0;
+}
+.logoi {
+  padding-right:20px;
+  padding-left:20px;
+  padding-top: 20px;
+}
+@media screen {
+  
+}
+@media only screen and (max-width: 744px) {
+  .topbar1{
+    left: -11%;
+  }
+
+}
