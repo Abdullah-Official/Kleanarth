@@ -21,7 +21,6 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const dispatch = useDispatch();
   // const { token, user } = useSelector((state) => state.user);
-  console.log(userType)
   // ! submitHandler Function
   const submitHandler = e => {
     e.preventDefault()

@@ -4,13 +4,27 @@ import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import Topbar1 from '../components/topbar'
 import Logo from '../uploads/LogoMain.png'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../reducers/userReducer'
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const dispatch = useDispatch()
   //? submitHandler Function
   const submitHandler = e => {
     e.preventDefault()
+    dispatch(loginUser({
+      email,
+      password
+    })).unwrap()
+    .then(e => {
+      alert("LoggedInn")
+      window.location.reload()
+    }).catch((e) => {alert("ERROR") 
+    window.location.reload()})
+    window.location.reload()
+    setEmail('');
+    setPassword('')
   }
 
   return (

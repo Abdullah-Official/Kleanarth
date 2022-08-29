@@ -5,7 +5,15 @@ import { postRequest } from '../app/helpers/fetch'
 
 const initialState = {
     user: {
-        userType: 'buyer'
+        UserType: 'admin',
+        EmailID: "user@email.com",
+        FirstName: "Nimra",
+        LastName: "Parveen",
+        Location: 'location',
+        UserID: 'user123',
+        UserStatus: 'active',
+        MobileNo: '121313',
+        Password: 'pass'
     },
     token: true,
     loading: false,
@@ -17,6 +25,15 @@ export const signupUser = createAsyncThunk(
     'registeruser',
     async (body) => {
      const result = await  postRequest(`${API_URL}/createUser`, body)
+     return result
+    }
+
+  )
+
+  export const loginUser = createAsyncThunk(
+    'loginUser',
+    async (body) => {
+     const result = await  postRequest(`${API_URL}/users/login`, body)
      return result
     }
 
@@ -49,6 +66,7 @@ export const signupUser = createAsyncThunk(
             state.user = data;
             return state;
          },
+         [loginUser.fulfilled]: (state,action) => { },
          [getUserById.fulfilled]: (state,action) => {
             let data = action.payload
             state.user = data;

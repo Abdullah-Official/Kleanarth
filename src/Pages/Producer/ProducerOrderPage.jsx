@@ -7,22 +7,119 @@ import { useNavigate } from 'react-router-dom'
 // * Imported Components
 import Producersidebar from '../../components/producersidebar'
 import Topbar1 from '../../components/topbar'
+import { useDispatch, useSelector } from "react-redux";
+import uuid from 'react-uuid';
+import { createProducedWaste } from '../../reducers/wasteReducer'
+import { createPayment } from '../../reducers/paymentReducer'
 
 const ProducerOrderPage = () => {
   const [waste, setWaste] = useState('Select Waste Type.....')
   const [account, setAccount] = useState('Select Account Type.....')
-
-  const [show, setShow] = useState(false)
+  const [paymentType, setPaymentType] = useState('')
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   const history = useNavigate()
 
+  const [show, setShow] = useState(false)
+  const dispatch = useDispatch();
+  
+  const { token, user } = useSelector((state) => state.user);
+  // const {  } = useSelector((state) => state.user);
   const nextPage = e => {
     e.preventDefault()
     history('/collectorInfoToProducer')
   }
+
+  const createNewPayment = () => {
+    dispatch(createPayment({
+      paymentID: uuid(), 
+      orderID: 'orderid', 
+      paymentType, 
+      accountNo: account, 
+      totalPaid: '12', 
+      paymentTime: new Date(), 
+      paymentStatus: 'inactive'
+    })).unwrap()
+    .then((e) => {
+      alert("Successfull")
+      setPaymentType('')
+      setAccount('')
+      handleClose()
+    })
+    .catch((e) => {
+      alert("ERROR")
+      console.log({
+        paymentID: uuid(), 
+        orderID: 'orderid', 
+        paymentType, 
+        accountNo: account, 
+        totalPaid: '12', 
+        paymentTime: new Date(), 
+        paymentStatus: 'inactive'
+      })
+      setPaymentType('')
+      setAccount('')
+      handleClose()
+    })
+    console.log({ paymentID: uuid(), 
+      orderID: 'orderid', 
+      paymentType, 
+      accountNo: account, 
+      totalPaid: '12', 
+      paymentTime: new Date(), 
+      paymentStatus: 'inactive'})
+      setPaymentType('')
+      setAccount('')
+      handleClose()
+  }
+
+
+  // add this function to CONFIRM BUTTON for Creating New Produced Waste
+  const createNewProducedWaste = () => {
+    dispatch(createProducedWaste({
+      wasteID : uuid(),
+    userID : user?.UserID ,
+    wasteType : waste,
+    creationDate : new Date().getTime(),
+    collectionTime : new Date().getTime(),
+    wasteValueInPkr : "12000"
+    })).unwrap()
+    .then(() => {
+      
+      alert("Successfull")})
+      setWaste('')
+      handleShow()
+      
+    .catch(() => {
+      alert("ERROR")
+    console.log({
+      wasteID : uuid(),
+      userID : user?.UserID ,
+      wasteType : waste,
+      creationDate : new Date().getTime(),
+      collectionTime : new Date().getTime(),
+      wasteValueInPkr : "12000"
+    })
+    setWaste('')
+    handleShow()
+  })
+    console.log({
+      wasteID : uuid(),
+      userID : user?.UserID ,
+      wasteType : waste,
+      creationDate : new Date().getTime(),
+      collectionTime : new Date().getTime(),
+      wasteValueInPkr : "12000"
+    })
+    setWaste('')
+    // nextPage()
+    // handleShow()
+  }
+
+
+  
   
   return (
     <>
@@ -88,7 +185,7 @@ const ProducerOrderPage = () => {
           </Row>
 
 
-            <Button onClick={handleShow}
+            <Button onClick={createNewProducedWaste}
               style={{
                 marginLeft: '10px',
                 marginRight: '20px',
@@ -116,6 +213,8 @@ const ProducerOrderPage = () => {
                     type='number'
                     placeholder='Account no.'
                     autoFocus
+                    onChange={(e) => setAccount(e.target.value)}
+                    value={account}
                   />
                 </Form.Group>
 
@@ -154,8 +253,8 @@ const ProducerOrderPage = () => {
 
                 <Form.Control
                   as='select'
-                  value={account}
-                  onChange={e => setAccount(parseInt(e.target.value))}
+                  value={paymentType}
+                  onChange={e => setPaymentType(parseInt(e.target.value))}
                 
                 >
                   <option value={parseInt('0')}                  
@@ -178,7 +277,7 @@ const ProducerOrderPage = () => {
               <Button variant='info' onClick={handleClose}>
                 Close
               </Button>
-              <Button variant='primary' onClick={nextPage}               
+              <Button variant='primary' onClick={createNewPayment}               
               style={{
 
                 backgroundColor:'#62fcaf',

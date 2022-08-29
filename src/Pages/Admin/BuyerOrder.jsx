@@ -1,13 +1,16 @@
 //*  Imported Libraries
 import React from 'react'
 import { Row, Col, Button, Form, Table } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Topbar1 from '../../components/topbar'
 
 // * Imported Components
 import Sidebar from '../../components/sidebar'
+import { StarRate } from '@mui/icons-material'
 
 const BuyerOrder = () => {
+  const state = useLocation();
+  console.log(state)
   return (
     <>
       <Topbar1 />

@@ -84,7 +84,7 @@ const App = () => {
                 <Route path="/" element={<HomePage />} exact />
                 <Route path="*" element={<HomePage />} />
               </>
-            ) : user?.userType === "collector" ? (
+            ) : user?.UserType === "collector" ? (
               <>
                 {/* Collector  */}
                 <Route path="*" element={<Collector />} />
@@ -117,7 +117,7 @@ const App = () => {
                   exact
                 />
               </>
-            ) : user?.userType === "producer" ? (
+            ) : user?.UserType === "producer" ? (
               <>
                 {/* Producer  */}
                 <Route path="*" element={<ProducerHome />} />
@@ -163,7 +163,7 @@ const App = () => {
                   exact
                 />
               </>
-            ) : user?.userType === "buyer" ? (
+            ) : user?.UserType === "buyer" ? (
               <>
                 {/* Buyer  */}
                 <Route path="*" element={<BuyerPage />} />
@@ -195,6 +195,7 @@ const App = () => {
               <>
                 {/* Admin  */}
 
+                <Route path="*" element={<AdminHome />} />
                 <Route path="/buyerAdmin" element={<BuyerAdmin />} exact />
                 <Route
                   path="/producerAdmin"

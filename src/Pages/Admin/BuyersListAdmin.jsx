@@ -1,5 +1,5 @@
 //*  Imported Libraries
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Row, Col, Table, Button } from 'react-bootstrap'
@@ -9,6 +9,32 @@ import Sidebar from '../../components/sidebar'
 import Topbar1 from '../../components/topbar'
 
 const BuyersListAdmin = () => {
+  const [buyers, setBuyers] = useState([
+    {
+      userNo: 1,
+      name: 'Order No',
+      phoneNo: '121311',
+      address: 'address user',
+      email: 'email@email.com',
+      password: 'password'
+    },
+    {
+      userNo: 2,
+      name: 'Order No',
+      phoneNo: '121311',
+      address: 'address user',
+      email: 'email@email.com',
+      password: 'password'
+    },
+    {
+      userNo: 3,
+      name: 'Order No',
+      phoneNo: '121311',
+      address: 'address user',
+      email: 'email@email.com',
+      password: 'password'
+    },
+  ])
   return (
     <>
       <Topbar1 />
@@ -96,30 +122,37 @@ const BuyersListAdmin = () => {
 
             </thead>
             <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>                
-                <td></td>
-                <td></td>
-                <td>            
-                  <Link to='/buyerOrder' style={{ color: '#83f28f' }}>
-                    <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
-                  </Link>
-                </td>
-                <td>            
-                  <Link to='/paymentByBuyer' style={{ color: '#83f28f' }}>
-                    <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
-                  </Link>
-                </td>
-                <td>
-                  <Link to='/buyerRating' style={{ color: '#83f28f' }}>
-                    <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
-                  </Link>
-                </td>
-
-              </tr>
+              {
+                buyers && buyers.map((v,i) => {
+                  return (
+                    <tr key={i}>
+                    <td>{v?.userNo}</td>
+                    <td>{v?.name}</td>
+                    <td>{v?.phoneNo}</td>
+                    <td>{v?.address}</td>                
+                    <td>{v?.email}</td>
+                    <td>{v?.password}</td>
+                    <td>            
+                      <Link to={{pathname: '/buyerOrder', state: {id: v?.id}}} style={{ color: '#83f28f' }}>
+                        <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
+                      </Link>
+                    </td>
+                    <td>            
+                      <Link to='/paymentByBuyer' style={{ color: '#83f28f' }}>
+                        <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to='/buyerRating' style={{ color: '#83f28f' }}>
+                        <span style={{ marginLeft: '10px',marginTop:'-10px',position:'absulate' }}>View</span>
+                      </Link>
+                    </td>
+    
+                  </tr>
+                  )
+                })
+              }
+           
             </tbody>
           </Table>
         </Col>
